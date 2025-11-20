@@ -10,10 +10,10 @@ Successfully implemented and deployed a complete Phase 1 validation system for a
 ## Deliverables
 
 ### Live Deployment
-- **Landing Page:** https://lbijeau.github.io/cuda/
-- **Field Form:** https://lbijeau.github.io/cuda/field-form/
-- **Detail Form:** https://lbijeau.github.io/cuda/detail-form/
-- **Repository:** https://github.com/lbijeau/cuda
+- **Landing Page:** https://lbijeau.github.io/herp-crossing/
+- **Field Form:** https://lbijeau.github.io/herp-crossing/field-form/
+- **Detail Form:** https://lbijeau.github.io/herp-crossing/detail-form/
+- **Repository:** https://github.com/lbijeau/herp-crossing
 
 ### Core Components
 

@@ -677,7 +677,7 @@ When you're ready to move from design to implementation, we can:
 - Weather and temperature tracking
 - Session data persistence (remembers observer name)
 
-**Live:** https://lbijeau.github.io/cuda/field-form/
+**Live:** https://lbijeau.github.io/herp-crossing/field-form/
 
 #### Detail Form (`detail-form/`)
 - Load observations by observer name
@@ -689,7 +689,7 @@ When you're ready to move from design to implementation, we can:
   - Photo URL linking
 - Structured notes format (appends to existing notes)
 
-**Live:** https://lbijeau.github.io/cuda/detail-form/
+**Live:** https://lbijeau.github.io/herp-crossing/detail-form/
 
 #### Backend (`scripts/google-apps-script.js`)
 - Three API endpoints: submit, getPatrols, update
@@ -757,7 +757,7 @@ GitHub Pages (Static Host)
 ### Files Created
 
 ```
-Repository: https://github.com/lbijeau/cuda
+Repository: https://github.com/lbijeau/herp-crossing
 
 Core Implementation:
 - field-form/index.html, styles.css, field-form.js (420 lines)

@@ -6,12 +6,12 @@ A two-phase data collection tool for amphibian road mortality monitoring. Volunt
 
 ## Live Deployment
 
-**Landing Page:** https://lbijeau.github.io/cuda/
+**Landing Page:** https://lbijeau.github.io/herp-crossing/
 
-**Field Form:** https://lbijeau.github.io/cuda/field-form/
+**Field Form:** https://lbijeau.github.io/herp-crossing/field-form/
 Quick capture during patrol - works offline, syncs when online
 
-**Detail Form:** https://lbijeau.github.io/cuda/detail-form/
+**Detail Form:** https://lbijeau.github.io/herp-crossing/detail-form/
 Add road details, traffic notes, and photos after patrol
 
 ## Features
@@ -37,7 +37,7 @@ Add road details, traffic notes, and photos after patrol
 ## Project Structure
 
 ```
-cuda/
+herp-crossing/
 ├── field-form/          # Mobile field capture interface
 │   ├── index.html
 │   ├── styles.css
