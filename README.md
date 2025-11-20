@@ -14,9 +14,21 @@ Validation system for testing standardized data collection workflow with volunte
 2. Update API endpoint URLs in JavaScript files
 3. Deploy to GitHub Pages or open `field-form/index.html` locally
 
+## Deployment
+
+**Live Site:** https://lbijeau.github.io/cuda/
+
+### Field Form
+- Bookmark: https://lbijeau.github.io/cuda/field-form/
+- Use during patrol to log observations
+
+### Detail Form
+- URL: https://lbijeau.github.io/cuda/detail-form/
+- Use after patrol to add details
+
 ## Usage
 
-- **Volunteers:** Bookmark `field-form/index.html` on phone
-- **After patrol:** Use `detail-form/index.html` to add details
+- **Volunteers:** Bookmark the Field Form on your phone's home screen
+- **After patrol:** Use the Detail Form to add road details and notes
 
 See `docs/plans/2025-11-19-amphibian-road-mortality-data-collection-design.md` for complete design.
