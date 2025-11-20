@@ -251,13 +251,98 @@ function syncOfflinePatrols() {
         });
 }
 
-// Placeholder function (will be implemented in next tasks)
+// Form submission
 function handleSubmit(e) {
     e.preventDefault();
-    console.log('Submit - to be implemented');
+
+    // Validate location
+    const latitude = document.getElementById('latitude').value;
+    const longitude = document.getElementById('longitude').value;
+
+    if (!latitude || !longitude) {
+        showStatus('Please capture your location before submitting', 'error');
+        return;
+    }
+
+    // Save observer name
+    const observer = document.getElementById('observer').value;
+    localStorage.setItem('observer', observer);
+
+    // Collect patrol data
+    const patrolData = {
+        patrolDate: document.getElementById('patrol-date').value,
+        patrolTime: document.getElementById('patrol-time').value,
+        latitude: latitude,
+        longitude: longitude,
+        observer: observer,
+        weather: document.getElementById('weather').value,
+        temperature: document.getElementById('temperature').value,
+        observations: []
+    };
+
+    // Collect all observations
+    const observationEntries = document.querySelectorAll('.observation-entry');
+    observationEntries.forEach((entry, idx) => {
+        patrolData.observations.push({
+            species: document.getElementById(`species-${idx}`).value,
+            count: parseInt(document.getElementById(`count-${idx}`).value),
+            lifeStage: document.getElementById(`life-stage-${idx}`).value,
+            direction: document.getElementById(`direction-${idx}`).value,
+            condition: document.getElementById(`condition-${idx}`).value,
+            notes: document.getElementById(`notes-${idx}`).value
+        });
+    });
+
+    // Submit or save offline
+    if (navigator.onLine) {
+        submitPatrolToServer(patrolData)
+            .then(() => {
+                showStatus('✅ Patrol submitted successfully!', 'success');
+                setTimeout(() => {
+                    resetForm();
+                }, 2000);
+            })
+            .catch(error => {
+                showStatus(`Error: ${error.message}. Saved offline instead.`, 'error');
+                saveOfflinePatrol(patrolData);
+            });
+    } else {
+        saveOfflinePatrol(patrolData);
+    }
 }
 
 function submitPatrolToServer(patrolData) {
-    // Placeholder - will be implemented in Task 7
-    return Promise.reject(new Error('Not implemented yet'));
+    return fetch(`${APPS_SCRIPT_URL}?action=submit`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(patrolData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Server error');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        return data;
+    });
+}
+
+function resetForm() {
+    // Clear observations
+    document.getElementById('observations-container').innerHTML = '';
+    observations = [];
+
+    // Reset session fields (except observer which is saved)
+    document.getElementById('patrol-form').reset();
+
+    // Re-initialize
+    initializeForm();
+
+    hideStatus();
 }
