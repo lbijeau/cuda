@@ -9,6 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeForm();
     setupEventListeners();
     checkOnlineStatus();
+
+    if (navigator.onLine) {
+        syncOfflinePatrols();
+    }
+});
+
+// Check for offline patrols when coming back online
+window.addEventListener('online', () => {
+    checkOnlineStatus();
+    syncOfflinePatrols();
 });
 
 function initializeForm() {
@@ -207,8 +217,47 @@ function removeObservation(index) {
     }
 }
 
+// Offline storage
+function saveOfflinePatrol(patrolData) {
+    let offlinePatrols = JSON.parse(localStorage.getItem('offlinePatrols') || '[]');
+    offlinePatrols.push({
+        data: patrolData,
+        timestamp: new Date().toISOString()
+    });
+    localStorage.setItem('offlinePatrols', JSON.stringify(offlinePatrols));
+    showStatus('Patrol saved offline. Will sync when online.', 'success');
+}
+
+function syncOfflinePatrols() {
+    const offlinePatrols = JSON.parse(localStorage.getItem('offlinePatrols') || '[]');
+
+    if (offlinePatrols.length === 0) {
+        return Promise.resolve();
+    }
+
+    console.log(`Syncing ${offlinePatrols.length} offline patrol(s)...`);
+
+    const syncPromises = offlinePatrols.map(patrol =>
+        submitPatrolToServer(patrol.data)
+    );
+
+    return Promise.all(syncPromises)
+        .then(() => {
+            localStorage.removeItem('offlinePatrols');
+            showStatus(`Synced ${offlinePatrols.length} offline patrol(s)!`, 'success');
+        })
+        .catch(error => {
+            console.error('Error syncing offline patrols:', error);
+        });
+}
+
 // Placeholder function (will be implemented in next tasks)
 function handleSubmit(e) {
     e.preventDefault();
     console.log('Submit - to be implemented');
+}
+
+function submitPatrolToServer(patrolData) {
+    // Placeholder - will be implemented in Task 7
+    return Promise.reject(new Error('Not implemented yet'));
 }
